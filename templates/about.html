@@ -1,0 +1,670 @@
+{% extends "base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Animated Section</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    {% block content %}
+    <style>
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #ffffff;
+            --text-color: #333333;
+            --light-color: #ffffff;
+            --accent-color: #666666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            overflow-x: hidden;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+      
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            color: var(--primary-color);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-color);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .flex-container {
+            display: flex;
+            gap: 60px;
+            align-items: center;
+            background-color: var(--light-color);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-top: 50px;
+        }
+
+        .column {
+            flex: 1;
+        }
+
+        .image-column {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .image-column:hover .image {
+            transform: scale(1.1);
+        }
+
+        .text-column {
+            padding: 60px;
+        }
+
+        .text {
+            color: var(--text-color);
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .highlight {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .cta-section {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+        }
+
+        .cta-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .cta-text {
+            flex: 1;
+            font-size: 20px;
+            line-height: 1.8;
+        }
+
+        .cta-image {
+            flex: 1;
+        }
+
+        .cta-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.5s ease;
+        }
+
+        .cta-image img:hover {
+            transform: translateY(-15px);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--light-color);
+            padding: 15px 40px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transition: all 0.6s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            background-color: #333333;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 102, 102, 0.3);
+        }
+
+        .features-section {
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+
+        .features-icons {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin-bottom: 60px;
+        }
+
+        .feature-icon {
+            width: 100px;
+            height: auto;
+            transition: all 0.5s ease;
+        }
+
+        .feature-icon:hover {
+            transform: translateY(-15px) rotate(10deg);
+        }
+
+        .features-text {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--primary-color);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @media (max-width: 991px) {
+            .container {
+                padding: 0 30px;
+            }
+
+            .nav-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .flex-container,
+            .cta-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .features-icons {
+                flex-wrap: wrap;
+                gap: 40px;
+            }
+
+            .text-column,
+            .cta-text {
+                padding: 40px;
+            }
+
+            .section {
+                display: block; /* Ensure sections are visible */
+                opacity: 1;    /* Make sure they are fully opaque */
+                transition: opacity 0.5s ease; /* Smooth transition, if needed */
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .text,
+            .cta-text,
+            .features-text {
+                font-size: 16px;
+            }
+        }
+
+
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .footer-section {
+            background-color: #000000;
+            padding: 60px 20px;
+            color: white;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+        .footer-title {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .footer-text {
+            font-size: 1em;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-link {
+            color: #ecf0f1;
+            text-decoration: none;
+            font-size: 1em;
+            line-height: 2;
+            transition: color 0.3s ease;
+        }
+        .footer-link:hover {
+            color: #3498db;
+        }
+        .social-icons {
+            display: flex;
+            gap: 20px;
+        }
+        .social-icon {
+            color: white;
+            font-size: 1.5em;
+            text-decoration: none;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: scale(1.2);
+            color: #3498db;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid #34495e;
+        }
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+            }
+            .footer-column {
+                width: 100%;
+            }
+        }
+
+        @keyframes zoomInOut {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .c {
+            display: inline-block;
+            animation: zoomInOut 3s infinite;
+        }
+        .section.features-section {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #333;
+        }
+        
+        .features-icons {
+            margin-bottom: 50px;
+        }
+        
+        .features-grid {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .feature-column {
+            display: flex;
+            flex-direction: column;
+            width: 33.333%;
+        }
+        
+        .feature-card {
+            display: flex;
+            flex-grow: 1;
+            flex-direction: column;
+            color: #000;
+            font-family: Inter, sans-serif;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .feature-icon {
+            aspect-ratio: 1;
+            object-fit: contain;
+            width: 72px;
+            margin-bottom: 15px;
+        }
+        
+        .feature-title {
+            font-size: 20px;
+            font-weight: 700;
+            text-align: center;
+            margin: 0;
+        }
+        
+        .feature-description {
+            margin-top: 20px;
+            font: 500 16px Inter, sans-serif;
+            text-align: center;
+            color: #666;
+        }
+        
+        .features-text {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .features-text p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        @media (max-width: 991px) {
+            .features-grid {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 30px;
+            }
+        
+            .feature-column {
+                width: 100%;
+            }
+        
+            .section-title {
+                font-size: 30px;
+            }
+        
+            .feature-title {
+                font-size: 18px;
+            }
+        
+            .feature-description {
+                font-size: 14px;
+            }
+        
+            .features-text p {
+                font-size: 16px;
+            }
+        }
+        @media (max-width: 768px) {
+            .nav-header {
+                flex-direction: column;
+                padding: 20px;
+            }
+            .nav-links {
+                margin-top: 20px;
+            }
+            .contact-form {
+                padding: 40px 20px;
+            }
+            .form-row {
+                flex-direction: column;
+            }
+            .footer-grid {
+                flex-direction: column;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+   
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Our Story</h2>
+            <div class="flex-container">
+                <div class="column image-column">
+                    <img src="{% static '2.png' %}" alt="Our Story" class="image" loading="lazy">
+                </div>
+                <div class="column text-column">
+                    <p class="text">
+                        Our story in dispatching goes beyond mere logistics. It's a story of
+                        <span class="highlight">social responsibility</span> and
+                        <span class="highlight">community engagement</span>. We actively seek ways to
+                        minimize our environmental footprint, whether through route optimization,
+                        vehicle maintenance, or adopting sustainable practices in our operations.
+                    </p>
+                    <p class="text">
+                        We strive to be good corporate citizens, giving back to the communities in
+                        which we operate and making a <span class="highlight">positive impact</span>
+                        wherever we can.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section cta-section" id="cta">
+        <div class="container">
+            <h2 class="section-title">Join Us Today</h2>
+            <div class="cta-content">
+                <div class="cta-text">
+                    <p>Prioritizing the safety of drivers, the integrity of the cargo, and environmental sustainability in all dispatching decisions. Considering the broader impact of dispatching decisions on communities and society, and striving to minimize negative consequences while maximizing positive outcomes.</p>
+                    <a href="/contact" class="cta-button">LET'S TALK</a>
+                </div>
+                <div class="cta-image">
+                    <img src="{% static '2.png' %}" alt="CTA Image" class="floating">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section features-section" id="features">
+        <div class="container">
+            <h2 class="section-title">Our Features</h2>
+            <div class="features-icons">
+                <div class="features-grid">
+                    <article class="feature-column">
+                        <div class="feature-card">
+                            <div class="feature-icon-wrapper">
+                                <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/6d1e93d535735349dcee398789f3a9a529350b7d87ed9a43c0955f0dd45af189?apiKey=c8840f6f18d143caac661e1e8805bd8a&" class="feature-icon" alt="Super Efficient icon" />
+                                <h3 class="feature-title">Super Efficient</h3>
+                            </div>
+                            <p class="feature-description">This can lead to a greater output and overall success in meeting deadlines and goals.</p>
+                        </div>
+                    </article>
+                    <article class="feature-column">
+                        <div class="feature-card">
+                            <div class="feature-icon-wrapper">
+                                <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/dcbae709e73b30f913b26e98e7a521e87b3cc3437edcb4844fcbfc2c7ebc67bc?apiKey=c8840f6f18d143caac661e1e8805bd8a&" class="feature-icon" alt="Deeply Committed icon" />
+                                <h3 class="feature-title">Deeply Committed</h3>
+                            </div>
+                            <p class="feature-description">Being able to receive packages on time can also help you manage your schedule efficiently.</p>
+                        </div>
+                    </article>
+                    <article class="feature-column">
+                        <div class="feature-card">
+                            <div class="feature-icon-wrapper">
+                                <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/787219a085cc9a4f52f479dddb2db3e85dd2cc073dc3764b021aacfc83c56ed2?apiKey=c8840f6f18d143caac661e1e8805bd8a&" class="feature-icon" alt="Highly Skilled icon" />
+                                <h3 class="feature-title">Highly Skilled</h3>
+                            </div>
+                            <p class="feature-description">First two loads are free of cost. Six percent fees after two free loads.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div class="features-text">
+                <p>Our innovative features lead to greater output and overall success in meeting deadlines and goals, ensuring satisfaction for both our clients and partners.</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 class="footer-title">VirileLogistics</h3>
+                    <p class="footer-text">Efficient logistics solutions for your business growth.</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/profile.php?id=61562438232510&mibextid=LQQJ4d&rdid=2zyQ0NDyIWPH9Gid&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2FkDNGWh9DoXvdjNer%2F%3Fmibextid%3DLQQJ4d" class="social-icon">📘</a>
+                        <a href="https://www.instagram.com/virilelogistics/?igsh=YzdwaHJuZ3JsazBi" class="social-icon">🐦</a>
+                        <a href="https://www.linkedin.com/in/vasudev-t-gupta-b59862317/" class="social-icon">🔗</a>
+                    </div>
+
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="/" class="footer-link">Home</a></li>
+                        <li><a href="/service" class="footer-link">Services</a></li>
+                        <li><a href="/about" class="footer-link">About Us</a></li>
+                        <li><a href="/contact" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><a href="tel:+1(901)578-8772" class="footer-link">+1(901)578-8772</a></li>
+                        <li><a href="mailto:info@virilelogistics.com" class="footer-link">info@virilelogistics.com</a></li>
+
+                        <li><a href="#" class="footer-link">3477 McKee Rd #1018 San jose,CA 95127 US</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 VirileLogistics. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navItems = document.querySelectorAll('.nav-item');
+            const sections = document.querySelectorAll('.section');
+            const header = document.querySelector('.header');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    navItems.forEach(navItem => navItem.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top >= 0 &&
+                    rect.left >= 0 &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            }
+
+            function handleScroll() {
+                if (window.scrollY > 10) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+
+                sections.forEach(section => {
+                    if (isInViewport(section)) {
+                        section.classList.add('visible');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', handleScroll);
+            handleScroll();
+        });
+
+
+
+        
+    </script>
+    
+</body>
+{% endblock %}
+</html>
+

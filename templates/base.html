@@ -1,0 +1,234 @@
+{% comment %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Virile Logistics{% endblock %}</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            background-color: #F8A80E;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+        }
+        .header .c {
+            animation: zoomInOut 3s infinite;
+        }
+        @keyframes zoomInOut {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .nav-header {
+            background-color: #131212;
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+            box-sizing: border-box;
+        }
+        .nav-header:hover {
+            background-color: #1f1f1f;
+        }
+        .nav-logo {
+            width: 90px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+        .nav-logo:hover {
+            transform: scale(1.1);
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #ccb90d;
+        }
+        @media (max-width: 768px) {
+            .nav-header {
+                padding: 10px;
+            }
+            .nav-links {
+                gap: 10px;
+            }
+            .nav-link {
+                font-size: 14px;
+            }
+            .nav-logo {
+                width: 70px;
+            }
+        }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <header class="header">
+        <div class="c">
+            First two loads are totally free
+        </div>
+    </header>
+    <nav class="nav-header">
+        <img src="{% static 'l.png' %}" alt="Logo" class="nav-logo">
+        <div class="nav-links">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/about" class="nav-link">About Us</a>
+            <a href="/service" class="nav-link">Services</a>
+            <a href="/contact" class="nav-link">Contact Us</a>
+        </div>
+    </nav>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        {% block footer %}{% endblock %}
+    </footer>
+</body>
+</html> {% endcomment %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Virile Logistics{% endblock %}</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+        .header {
+            background-color: #F8A80E;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .header .c {
+            animation: zoomInOut 3s infinite;
+        }
+        @keyframes zoomInOut {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .nav-header {
+            background-color: #131212;
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+            box-sizing: border-box;
+        }
+        .nav-header:hover {
+            background-color: #1f1f1f;
+        }
+        .nav-logo {
+            width: 90px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+        .nav-logo:hover {
+            transform: scale(1.1);
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: nowrap; /* Ensure nav links stay in one line */
+            overflow-x: auto; /* Add horizontal scroll for smaller screens */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        }
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #ccb90d;
+        }
+        @media (max-width: 768px) {
+            .nav-header {
+                padding: 10px;
+            }
+            .nav-links {
+                gap: 10px;
+                overflow-x: auto; /* Allow horizontal scroll on smaller screens */
+            }
+            .nav-link {
+                font-size: 14px;
+            }
+            .nav-logo {
+                width: 70px;
+            }
+        }
+        @media (max-width: 480px) {
+            .nav-header {
+                padding: 5px;
+            }
+            .nav-links {
+                flex-direction: row; /* Ensure links are in a row */
+                gap: 8px;
+                overflow-x: auto; /* Allow horizontal scroll on smaller screens */
+            }
+            .nav-link {
+                font-size: 12px;
+            }
+            .nav-logo {
+                width: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="c">
+            First two loads are totally free
+        </div>
+    </header>
+
+    <nav class="nav-header">
+        <img src="{% static 'l.png' %}" alt="Logo" class="nav-logo">
+        <div class="nav-links">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/about" class="nav-link">About Us</a>
+            <a href="/service" class="nav-link">Services</a>
+            <a href="/contact" class="nav-link">Contact Us</a>
+        </div>
+    </nav>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        {% block footer %}
+        {% endblock %}
+    </footer>
+</body>
+</html>

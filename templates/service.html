@@ -1,0 +1,591 @@
+{% extends "base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block content %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truck Dispatch Agency - Our Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #ffffff;
+            --accent-color: #FFA500;
+            --text-color: #333333;
+        }
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            overflow: hidden;
+            padding: 0 20px;
+        }
+        {% comment %} header {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #FFD700 100%);
+            color: var(--primary-color);
+            padding: 40px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            animation: fadeInDown 1s ease-out;
+        } {% endcomment %}
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        .service-item {
+            background: var(--secondary-color);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex-basis: calc(33.333% - 20px);
+            display: flex;
+            flex-direction: column;
+        }
+        .service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        .service-item h2 {
+            color: var(--accent-color);
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+        .service-item p {
+            color: var(--text-color);
+            flex-grow: 1;
+        }
+        .service-item .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+        }
+        .cta-button:hover {
+            background-color: #FFD700;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: var(--secondary-color);
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid var(--accent-color);
+            width: 80%;
+            max-width: 600px;
+            border-radius: 8px;
+        }
+        .close {
+            color: var(--accent-color);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: #FFD700;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @media (max-width: 768px) {
+            .service-item {
+                flex-basis: 100%;
+            }
+        }
+       
+       
+        .c {
+            animation: zoomInOut 3s infinite;
+        }
+        @keyframes zoomInOut {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+       
+       
+        .social-icons {
+            display: flex;
+            gap: 20px;
+        }
+        .social-icon {
+            color: var(--secondary-color);
+            font-size: 1.5em;
+            text-decoration: none;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: scale(1.2);
+            color: var(--accent-color);
+        }
+      
+        .service-figure {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .service-figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .service-figure figcaption {
+            margin-top: 10px;
+            font-style: italic;
+            color: var(--text-color);
+        }
+        @media (max-width: 768px) {
+            .nav-header {
+                flex-direction: column;
+                padding: 20px;
+            }
+            .nav-links {
+                margin-top: 20px;
+            }
+            .contact-form {
+                padding: 40px 20px;
+            }
+            .form-row {
+                flex-direction: column;
+            }
+            .footer-grid {
+                flex-direction: column;
+            }
+        }
+        
+
+
+
+
+
+            .container {
+                width: 100%;
+                padding: 0 15px;
+                box-sizing: border-box;
+            }
+        
+            .services {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                margin: 0 auto;
+                max-width: 1200px;
+            }
+        
+            .service-item {
+                flex: 1 1 calc(33.333% - 20px);
+                box-sizing: border-box;
+                margin: 10px;
+                padding: 15px;
+                background-color: #f9f9f9;
+                border-radius: 8px;
+                text-align: center; /* Center align text and elements inside service-item */
+            }
+        
+            .icon {
+                font-size: 24px;
+                color: #333;
+            }
+        
+            .service-figure {
+                margin: 10px 0;
+            }
+        
+            .cta-button {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: black; /* Change button color here */
+                color: #F8A80E;
+                text-decoration: none;
+                border-radius: 4px;
+            }
+        
+            @media (max-width: 768px) {
+                .service-item {
+                    flex: 1 1 calc(50% - 20px); /* Two items per row */
+                }
+            }
+        
+            @media (max-width: 480px) {
+                .service-item {
+                    flex: 1 1 calc(100% - 20px); /* One item per row */
+                }
+            }
+      
+
+         .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+        }
+    
+        /* Modal content box */
+        .modal-content {
+            background-color: #fefefe;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            max-width: 500px; /* Max width for smaller screens */
+            box-sizing: border-box; /* Ensure padding and borders are included in the width */
+            position: relative; /* To position the close button inside */
+            border-radius: 8px; /* Optional: Add some rounding */
+        }
+    
+        /* Close button */
+        .close-button {
+            color: #aaa;
+            position: absolute; /* Position inside the modal content */
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+    
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    
+        /* Media query for smaller screens */
+        @media (max-width: 600px) {
+            .modal-content {
+                width: 90%; /* Adjust width for mobile devices */
+            }
+
+        
+            
+        }
+
+
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: black; /* Change button color here */
+            color: #F8A80E;
+            text-decoration: none;
+            border-radius: 4px;
+            border: none; /* Ensure no border influences the style */
+            cursor: pointer;
+        }
+    
+        .cta-button:hover {
+            background-color: orange; /* Change hover color here */
+            color: white; /* Change text color on hover */
+        }
+    
+        .cta-button:active {
+            background-color: #555; /* Change color when clicked */
+            color: #fff; /* Change text color when clicked */
+        }
+    
+        /* Optional: Add focus state for accessibility */
+        .cta-button:focus {
+            outline: 2px solid #F8A80E; /* Add outline to indicate focus */
+            outline-offset: 4px;
+        }
+
+
+
+
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .footer-section {
+            background-color: #000000;
+            padding: 60px 20px;
+            color: white;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+        .footer-title {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .footer-text {
+            font-size: 1em;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-link {
+            color: #ecf0f1;
+            text-decoration: none;
+            font-size: 1em;
+            line-height: 2;
+            transition: color 0.3s ease;
+        }
+        .footer-link:hover {
+            color: #3498db;
+        }
+        .social-icons {
+            display: flex;
+            gap: 20px;
+        }
+        .social-icon {
+            color: white;
+            font-size: 1.5em;
+            text-decoration: none;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: scale(1.2);
+            color: #3498db;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid #34495e;
+        }
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+            }
+            .footer-column {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+ 
+    
+    
+    <div class="container">
+        <section class="services">
+            <div class="service-item">
+                <i class="icon fas fa-route"></i>
+                <h2>Load Planning and Optimization</h2>
+                <figure class="service-figure">
+                   
+                </figure>
+                <p>We provide efficient load planning to maximize your fleet's capacity and minimize empty miles.</p>
+                <a href="#" class="cta-button" data-service="load-planning">Learn More</a>
+            </div>
+            <div class="service-item">
+                <i class="icon fas fa-truck"></i>
+                <h2>Driver Management</h2>
+                <figure class="service-figure">
+                   
+                </figure>
+                <p>Our driver management services ensure that your drivers are always compliant and well-coordinated.</p>
+                <a href="#" class="cta-button" data-service="driver-management">Learn More</a>
+            </div>
+            <div class="service-item">
+                <i class="icon fas fa-shipping-fast"></i>
+                <h2>Freight Dispatching</h2>
+                <figure class="service-figure">
+                    
+                </figure>
+                <p>We handle all aspects of freight dispatching, so you can focus on running your business.</p>
+                <a href="#" class="cta-button" data-service="freight-dispatching">Learn More</a>
+            </div>
+            <div class="service-item">
+                <i class="icon fas fa-map-marked-alt"></i>
+                <h2>Route Optimization</h2>
+                <figure class="service-figure">
+             
+                </figure>
+                <p>Our advanced algorithms create the most efficient routes to save time and fuel.</p>
+                <a href="#" class="cta-button" data-service="route-optimization">Learn More</a>
+            </div>
+            <div class="service-item">
+                <i class="icon fas fa-clipboard-check"></i>
+                <h2>Compliance Management</h2>
+                <figure class="service-figure">
+                  
+                </figure>
+                <p>Stay compliant with regulations and avoid penalties with our comprehensive compliance services.</p>
+                <a href="#" class="cta-button" data-service="compliance-management">Learn More</a>
+            </div>
+            <div class="service-item">
+                <i class="icon fas fa-chart-line"></i>
+                <h2>Performance Analytics</h2>
+                <figure class="service-figure">
+               
+                </figure>
+                <p>Gain insights into your fleet's performance with our detailed analytics and reporting tools.</p>
+                <a href="#" class="cta-button" data-service="performance-analytics">Learn More</a>
+            </div>
+        </section>
+    </div>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="modal-title"></h2>
+            <p id="modal-description"></p>
+        </div>
+    </div>
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 class="footer-title">VirileLogistics</h3>
+                    <p class="footer-text">Efficient logistics solutions for your business growth.</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/profile.php?id=61562438232510&mibextid=LQQJ4d&rdid=2zyQ0NDyIWPH9Gid&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2FkDNGWh9DoXvdjNer%2F%3Fmibextid%3DLQQJ4d" class="social-icon">📘</a>
+                        <a href="https://www.instagram.com/virilelogistics/?igsh=YzdwaHJuZ3JsazBi" class="social-icon">🐦</a>
+                        <a href="https://www.linkedin.com/in/vasudev-t-gupta-b59862317/" class="social-icon">🔗</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="/" class="footer-link">Home</a></li>
+                        <li><a href="/service" class="footer-link">Services</a></li>
+                        <li><a href="/about" class="footer-link">About Us</a></li>
+                        <li><a href="/contact" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><a href="tel:+1(901)578-8772" class="footer-link">+1(901)578-8772</a></li>
+                        <li><a href="mailto:info@virilelogistics.com" class="footer-link">info@virilelogistics.com</a></li>
+                        <li><a href="#" class="footer-link">3477 McKee Rd #1018 San jose,CA 95127 US</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 VirileLogistics. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const serviceItems = document.querySelectorAll('.service-item');
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+            const closeBtn = document.querySelector('.close-button');
+    
+            const serviceDetails = {
+                'load-planning': {
+                    title: 'Load Planning and Optimization',
+                    description: 'Our advanced load planning system uses AI algorithms to optimize cargo distribution, maximizing your fleet\'s capacity utilization. We consider factors such as weight distribution, route efficiency, and delivery schedules to minimize empty miles and reduce operational costs.'
+                },
+                'driver-management': {
+                    title: 'Driver Management',
+                    description: 'Our comprehensive driver management service includes performance tracking, compliance monitoring, and continuous training programs. We ensure your drivers are always up-to-date with the latest regulations and best practices, maximizing efficiency and safety.'
+                },
+                'freight-dispatching': {
+                    title: 'Freight Dispatching',
+                    description: 'Our expert dispatchers use state-of-the-art technology to match your trucks with the most profitable loads. We handle all communication with shippers and receivers, allowing you to focus on growing your business.'
+                },
+                'route-optimization': {
+                    title: 'Route Optimization',
+                    description: 'Using advanced mapping technologies and real-time traffic data, we design the most efficient routes for your fleet. This service helps reduce fuel consumption, minimize travel time, and increase the number of deliveries per trip, significantly boosting your operational efficiency.'
+                },
+                'compliance-management': {
+                    title: 'Compliance Management',
+                    description: 'Stay ahead of regulatory requirements with our comprehensive compliance management service. We handle everything from driver hour logging to vehicle maintenance schedules, ensuring your fleet always operates within legal parameters and avoiding costly penalties.'
+                },
+                'performance-analytics': {
+                    title: 'Performance Analytics',
+                    description: 'Gain valuable insights into your fleet\'s performance with our advanced analytics tools. We provide detailed reports on fuel efficiency, driver performance, delivery times, and more. Use this data to make informed decisions and continuously improve your operations.'
+                }
+            };
+    
+            serviceItems.forEach((item, index) => {
+                item.style.animationDelay = `${index * 0.1}s`;
+                item.style.animation = 'fadeInDown 0.5s ease-out forwards';
+            });
+    
+            document.querySelectorAll('.cta-button').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const service = this.getAttribute('data-service');
+                    modalTitle.textContent = serviceDetails[service].title;
+                    modalDescription.textContent = serviceDetails[service].description;
+                    modal.style.display = 'flex'; // Use 'flex' to align center
+                });
+            });
+    
+            closeBtn.onclick = function() {
+                modal.style.display = 'none';
+            }
+    
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            }
+        });
+    </script>
+</body>
+{% endblock %}
+</html>
