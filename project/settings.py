@@ -117,7 +117,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = '/root/virilelogistics/static/'
 # STATIC_ROOT = '/var/www/virilelogistics/static/'
 
 
