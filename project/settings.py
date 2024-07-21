@@ -128,8 +128,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Email Settings
 
-DEFAULT_FROM_EMAIL = 'virilelogistics@gmail.com'
-OWNER_EMAIL = 'Dev@virilelogistics.com'  # Replace with the actual owner's email
+DEFAULT_FROM_EMAIL = 'work.kavleen@gmail.com'
+OWNER_EMAIL = 'virilelogistics@gmail.com'  # Replace with the actual owner's email
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
