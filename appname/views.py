@@ -19,17 +19,20 @@ def contact_view(request):
         form = ReachModelForm(request.POST)
         if form.is_valid():
             # Save the form data to the database
-            form_instance = form.save()
+            name = request.POST.get('name')
+            email = request.POST.get('email')
+            comment = request.POST.get('comment')
+            #form_instance = form.save()
 
             # Send an email to the owner
             subject = 'New Contact Form Submission'
-            message = f'Name: {form_instance.name}\nEmail: {form_instance.email}\nComment: {form_instance.comment}'
+            message = f'Name: {name}\nEmail: {email}\nComment: {comment}'
             from_email = settings.EMAIL_HOST_USER
             recipient_list = ['virilelogistics@gmail.com']  # Replace with the owner's email address
 
-            _email = send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+            _email = send_mail(subject, message, from_email, recipient_list)
             print(_email)
-            return JsonResponse({'success': True, 'message': 'Thank you for your message. We will get back to you soon!'})
+
         else:
             errors = form.errors.as_json()
             return JsonResponse({'success': False, 'errors': errors})
