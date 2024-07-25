@@ -23,10 +23,10 @@ def contact_view(request):
             subject = 'New Contact Form Submission'
             message = f'Name: {form_instance.name}\nEmail: {form_instance.email}\nComment: {form_instance.comment}'
             from_email = settings.DEFAULT_FROM_EMAIL
-            recipient_list = ['work.kavleen@gmail.com']  # Replace with the owner's email address
+            recipient_list = ['virilelogistics@gmail.com']  # Replace with the owner's email address
 
-            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
-
+            _email = send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+            print(_email)
             return JsonResponse({'success': True, 'message': 'Thank you for your message. We will get back to you soon!'})
         else:
             errors = form.errors.as_json()
@@ -66,9 +66,10 @@ def submit_contact_form(request):
             Preferred Contact Method: {form.cleaned_data['contact_method']}
             """
             from_email = settings.DEFAULT_FROM_EMAIL
-            recipient_list = [settings.OWNER_EMAIL]
+            recipient_list = ['virilelogistics@gmail.com']
             
-            send_mail(subject, message, from_email, recipient_list)
+            _email = send_mail(subject, message, from_email, recipient_list)
+            print(_email)
             
             return JsonResponse({'success': True})
         else:
