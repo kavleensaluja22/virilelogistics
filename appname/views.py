@@ -5,6 +5,7 @@ from .forms import ReachModelForm
 from django.shortcuts import render, redirect
 from django.shortcuts import render, HttpResponse , HttpResponseRedirect
 # Create your views here.
+from django.views.decorators.csrf import csrf_exempt
 
 def home(request):
     return render(request,'home.html')
@@ -12,6 +13,7 @@ def about(request):
     return render(request,'about.html')
 
 
+@csrf_exempt
 def contact_view(request):
     if request.method == 'POST':
         form = ReachModelForm(request.POST)
@@ -49,6 +51,7 @@ from django.conf import settings
 from .forms import ContactFormModelForm
 from .forms import ContactFormModelForm
 
+@csrf_exempt
 def submit_contact_form(request):
     if request.method == 'POST':
         form = ContactFormModelForm(request.POST)
