@@ -22,7 +22,7 @@ def contact_view(request):
             # Send an email to the owner
             subject = 'New Contact Form Submission'
             message = f'Name: {form_instance.name}\nEmail: {form_instance.email}\nComment: {form_instance.comment}'
-            from_email = settings.DEFAULT_FROM_EMAIL
+            from_email = settings.EMAIL_HOST_USER
             recipient_list = ['virilelogistics@gmail.com']  # Replace with the owner's email address
 
             _email = send_mail(subject, message, from_email, recipient_list, fail_silently=False)
@@ -65,7 +65,8 @@ def submit_contact_form(request):
             Query: {form.cleaned_data['query']}
             Preferred Contact Method: {form.cleaned_data['contact_method']}
             """
-            from_email = settings.DEFAULT_FROM_EMAIL
+            
+            from_email = settings.EMAIL_HOST_USER
             recipient_list = ['virilelogistics@gmail.com']
             
             _email = send_mail(subject, message, from_email, recipient_list)
